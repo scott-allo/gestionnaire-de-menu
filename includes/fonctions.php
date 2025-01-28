@@ -1,1 +1,2 @@
-# Fonctions communes (ajouter, modifier, supprimer)
+<?
+// Fonctions communes (ajouter, modifier, supprimer)
