@@ -1,0 +1,1 @@
+// Page principale : affiche le menu et les fonctionnalités principales
