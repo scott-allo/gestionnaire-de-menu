@@ -1,6 +1,6 @@
- //Page de connexion pour les restaurateurs
 
 <?php
+ //Page de connexion pour les restaurateurs
 session_start();
 include 'includes/db.php';
 
