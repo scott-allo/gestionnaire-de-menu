@@ -1,6 +1,7 @@
-<? 
-//Page unique pour gérer les plats, catégories et ingrédients
+
 <?php
+//Page unique pour gérer les plats, catégories et ingrédients
+
 $servername = "localhost";
 $username = "username";
 $password = "password";
