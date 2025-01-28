@@ -1,1 +1,2 @@
-# Page unique pour gérer les plats, catégories et ingrédients
+<? 
+//Page unique pour gérer les plats, catégories et ingrédients
