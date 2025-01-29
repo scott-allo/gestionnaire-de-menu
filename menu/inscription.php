@@ -113,7 +113,7 @@ a:hover {
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Mot de passe" required>
     <button type="submit" name="submit">S'inscrire</button>
-    <p>Déjà inscrit ? <a href="connexion.php">Se connecter</a></p>
+    <p>Déjà inscrit ? <a href="login.php">Se connecter</a></p>
 </form>
 
     </div>

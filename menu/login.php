@@ -8,7 +8,7 @@ if(isset($_POST['login'])) {
     try {
         // Vérifier si les champs sont remplis
         if(empty($_POST['email']) || empty($_POST['password'])){
-            header("Location: connection.html?error=Tous les champs sont obligatoires !");
+            header("Location: login.php?error=Tous les champs sont obligatoires !");
             exit();
         }
 
@@ -29,11 +29,11 @@ if(isset($_POST['login'])) {
             exit();
         } else {
             // L'email ou le mot de passe est incorrect
-            header("Location: connection.html?error=Email ou mot de passe incorrect !");
+            header("Location: login.php?error=Email ou mot de passe incorrect !");
             exit();
         }
     } catch (PDOException $e) {
-        header("Location: connection.html?error=Erreur de base de données: " . urlencode($e->getMessage()));
+        header("Location: login.php?error=Erreur de base de données: " . urlencode($e->getMessage()));
         exit();
     }
 }
