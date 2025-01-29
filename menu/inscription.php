@@ -4,6 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    
+    <?php
+$host = "localhost";
+$db = "gestionnaire-de-menu";
+$user = "root"; 
+$password = ""; 
+
+if(isset($_POST['submit'])){
+    try {
+        // Vérifier si les champs sont remplis
+        if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password'])){
+            header("Location: connection.html?error=Tous les champs sont obligatoires !");
+            exit();
+        }
+
+        // Connexion à la base de données
+        $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // Hacher le mot de passe
+        $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+        // Préparer et exécuter la requête d'insertion
+        $query = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
+        $query->bindValue(':name', $_POST['name'], PDO::PARAM_STR);
+        $query->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
+        $query->bindValue(':password', $hashedPassword, PDO::PARAM_STR);
+        
+        $query->execute();
+
+        // Redirection vers la page de connexion après inscription réussie
+        header("Location: connexion.php?success=Inscription réussie !");
+        exit();
+    } catch (PDOException $e) {
+        header("Location: connection.php?error=Erreur de base de données: " . urlencode($e->getMessage()));
+        exit();
+    }
+}
+?>
+
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,26 +81,44 @@
         button:hover {
             background-color:rgb(240, 181, 221);
         }
+        p {
+    margin-top: 15px;
+}
+
+a {
+    color: #101720;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>Sign Up</h2>
+        <h2>Bienvenue sur Art'doise</h2>
+        <h3>Inscription</h3>
 
         <?php
         if(isset($_GET['error'])) {
             echo '<p style="color: red;">' . htmlspecialchars($_GET['error']) . '</p>';
         }
+        
         ?>
 
-        <form action="signup.php" method="POST">
-            <input type="text" name="firstname" placeholder="First Name" required>
-            <input type="text" name="lastname" placeholder="Last Name" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit" name="submit">Sign Up</button>
-        </form>
+<form action="" method="POST">
+    <input type="text" name="name" placeholder="Nom" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Mot de passe" required>
+    <button type="submit" name="submit">S'inscrire</button>
+    <p>Déjà inscrit ? <a href="connexion.php">Se connecter</a></p>
+</form>
+
     </div>
 
 </body>
 </html>
+</head>
+
