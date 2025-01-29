@@ -4,6 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    
+    <?php
+$host = "localhost";
+$db = "gestionnaire-de-menu";
+$user = "root"; 
+$password = ""; 
+
+if(isset($_POST['submit'])){
+    try {
+        // Check if fields are filled
+        if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password'])){
+            header("Location: signup.html?error=All fields are required!");
+            exit();
+        }
+
+        // Connect to the database
+        $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // Hash the password
+        $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+        // Prepare SQL query
+        $query = $pdo->prepare("INSERT INTO user (name, email, password) VALUES (:name, :email, :password)");
+        $query->bindValue(':name', $_POST['name'], PDO::PARAM_STR);
+        $query->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
+        $query->bindValue(':password', $hashedPassword, PDO::PARAM_STR);
+        
+        // Execute the query
+        $query->execute();
+
+        // Redirect to login page
+        header("Location: ../connexion.php");
+        exit();
+    } catch (PDOException $e) {
+        header("Location: signup.html?error=Database error: " . urlencode($e->getMessage()));
+        exit();
+    }
+}
+?>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,15 +92,18 @@
         if(isset($_GET['error'])) {
             echo '<p style="color: red;">' . htmlspecialchars($_GET['error']) . '</p>';
         }
+        
         ?>
 
         <form action="signup.php" method="POST">
-            <input type="text" name="firstname" placeholder="First Name" required>
-            <input type="text" name="lastname" placeholder="Last Name" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit" name="submit">Sign Up</button>
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="email" placeholder="Email" required>
+         <input type="password" name="password" placeholder="Password" required>
+         <button type="submit" name="submit">Sign Up</button>
         </form>
     </div>
 
 </body>
 </html>
+</head>
+
