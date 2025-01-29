@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&display=swap');
+
+:root {
+  --primary-color: #103939;
+  --secondary-color: #feeefe;
+  --accent-color: #d2636c;
+  --text-light: #aaa;
+  --text-dark: #555;
+
+}
+
+* {
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+
+/* ARRIERE - PLAN */
+
+
+.fond {
+
+  background: #60dfff
+  
+}
+
+
+body {
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  font-family: "Oswald", serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  color: var(--primary-color);
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-position: center;
+  overflow-x: hidden;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 80px;
+  height: 100vh;
+  background-color: var(--accent-color);
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  overflow: hidden; 
+}
+
+.liensidebar {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  font-family: "Bebas Neue", serif;
+  font-size: 2rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--secondary-color);
+  margin: 20px 0;
+  transition: color 0.3s ease;
+}
+
+.liensidebar:hover {
+  color: var(--primary-color);
+}
+
+.sidebar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar ul li {
+  text-decoration: none;
+}
+.formulaire {
+  margin-left: 600px;
+
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 150px;  
+  background-color: var(--secondary-color);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+ 
+}
+.navbar .profil img {
+  height: 50px;
+  border-radius: 50%;
+  border: 3px, solid #ff5353;
+  cursor: pointer;
+}
+
+.logo img {
+  margin-left: 80px;
+  height: 200px; 
+  width: auto; 
+  padding-top: 20px;
+}
+.copyright{
+margin-left:600px;
+}
+
+

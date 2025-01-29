@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le : mar. 28 jan. 2025 à 15:22
--- Version du serveur : 8.0.40
--- Version de PHP : 8.3.14
+-- Host: localhost:8889
+-- Generated on: Tue, 28 Jan 2025 at 15:22
+-- Server version: 8.0.40
+-- PHP version: 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,118 +18,118 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `gestionnaire-de-menu`
+-- Database: `menu-manager`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categories`
+-- Table structure for `categories`
 --
 
 CREATE TABLE `categories` (
   `id` int NOT NULL,
-  `nom` varchar(50) NOT NULL
+  `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Déchargement des données de la table `categories`
+-- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `nom`) VALUES
-(1, 'Entrée'),
-(2, 'Plat principal'),
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'Appetizer'),
+(2, 'Main Course'),
 (3, 'Dessert'),
-(4, 'Boissons'),
-(5, 'Accompagnements'),
+(4, 'Drinks'),
+(5, 'Side Dishes'),
 (6, 'Sauces');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ingredients`
+-- Table structure for `ingredients`
 --
 
 CREATE TABLE `ingredients` (
   `id` int NOT NULL,
-  `nom` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Déchargement des données de la table `ingredients`
+-- Dumping data for table `ingredients`
 --
 
-INSERT INTO `ingredients` (`id`, `nom`) VALUES
-(1, 'Tomate'),
+INSERT INTO `ingredients` (`id`, `name`) VALUES
+(1, 'Tomato'),
 (2, 'Mozzarella'),
-(3, 'Poulet'),
-(4, 'Bœuf'),
-(5, 'Saumon'),
-(6, 'Crème fraîche'),
+(3, 'Chicken'),
+(4, 'Beef'),
+(5, 'Salmon'),
+(6, 'Fresh Cream'),
 (7, 'Parmesan'),
-(8, 'Laitue'),
-(9, 'Pain'),
-(10, 'Champignons'),
-(11, 'Oignons'),
-(12, 'Pâtes'),
-(13, 'Riz'),
-(14, 'Basilic'),
-(15, 'Thon'),
-(16, 'Fraises'),
-(17, 'Chocolat'),
-(18, 'Sucre'),
-(19, 'Citron'),
-(20, 'Menthe');
+(8, 'Lettuce'),
+(9, 'Bread'),
+(10, 'Mushrooms'),
+(11, 'Onions'),
+(12, 'Pasta'),
+(13, 'Rice'),
+(14, 'Basil'),
+(15, 'Tuna'),
+(16, 'Strawberries'),
+(17, 'Chocolate'),
+(18, 'Sugar'),
+(19, 'Lemon'),
+(20, 'Mint');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `plats`
+-- Table structure for `dishes`
 --
 
-CREATE TABLE `plats` (
+CREATE TABLE `dishes` (
   `id` int NOT NULL,
-  `nom` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `description` text NOT NULL,
-  `prix` decimal(10,2) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `id_categorie` int NOT NULL,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP
+  `category_id` int NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Déchargement des données de la table `plats`
+-- Dumping data for table `dishes`
 --
 
-INSERT INTO `plats` (`id`, `nom`, `description`, `prix`, `image`, `id_categorie`, `date_creation`) VALUES
-(1, 'Salade César', 'Salade composée de laitue, poulet, croûtons et parmesan', 12.50, 'images/salade_cesar.jpg', 1, '2025-01-28 16:20:01'),
-(2, 'Pizza Margherita', 'Pizza à la sauce tomate, mozzarella et basilic', 9.90, 'images/pizza_margherita.jpg', 2, '2025-01-28 16:20:01'),
-(3, 'Burger Classique', 'Burger avec steak, fromage, tomate et laitue', 14.00, 'images/burger_classique.jpg', 2, '2025-01-28 16:20:01'),
-(4, 'Lasagnes Bolognese', 'Pâtes en couches avec viande, sauce tomate et fromage', 13.50, 'images/lasagnes.jpg', 2, '2025-01-28 16:20:01'),
-(5, 'Soupe de légumes', 'Soupe chaude à base de légumes frais', 8.00, 'images/soupe_legumes.jpg', 1, '2025-01-28 16:20:01'),
-(6, 'Tiramisu', 'Dessert italien à base de mascarpone et café', 6.00, 'images/tiramisu.jpg', 3, '2025-01-28 16:20:01'),
-(7, 'Mousse au chocolat', 'Dessert léger et chocolaté', 5.50, 'images/mousse_chocolat.jpg', 3, '2025-01-28 16:20:01'),
-(8, 'Filet de saumon', 'Filet de saumon grillé avec légumes de saison', 18.00, 'images/filet_saumon.jpg', 2, '2025-01-28 16:20:01'),
-(9, 'Frites maison', 'Frites fraîches et croustillantes', 4.00, 'images/frites_maison.jpg', 5, '2025-01-28 16:20:01'),
-(10, 'Sauce au poivre', 'Sauce crémeuse au poivre', 2.50, 'images/sauce_poivre.jpg', 6, '2025-01-28 16:20:01');
+INSERT INTO `dishes` (`id`, `name`, `description`, `price`, `image`, `category_id`, `created_at`) VALUES
+(1, 'Caesar Salad', 'Salad made of lettuce, chicken, croutons, and parmesan', 12.50, 'images/caesar_salad.jpg', 1, '2025-01-28 16:20:01'),
+(2, 'Margherita Pizza', 'Pizza with tomato sauce, mozzarella, and basil', 9.90, 'images/margherita_pizza.jpg', 2, '2025-01-28 16:20:01'),
+(3, 'Classic Burger', 'Burger with steak, cheese, tomato, and lettuce', 14.00, 'images/classic_burger.jpg', 2, '2025-01-28 16:20:01'),
+(4, 'Lasagna Bolognese', 'Layered pasta with meat, tomato sauce, and cheese', 13.50, 'images/lasagna.jpg', 2, '2025-01-28 16:20:01'),
+(5, 'Vegetable Soup', 'Hot soup made with fresh vegetables', 8.00, 'images/vegetable_soup.jpg', 1, '2025-01-28 16:20:01'),
+(6, 'Tiramisu', 'Italian dessert made with mascarpone and coffee', 6.00, 'images/tiramisu.jpg', 3, '2025-01-28 16:20:01'),
+(7, 'Chocolate Mousse', 'Light and chocolatey dessert', 5.50, 'images/chocolate_mousse.jpg', 3, '2025-01-28 16:20:01'),
+(8, 'Grilled Salmon Fillet', 'Grilled salmon fillet with seasonal vegetables', 18.00, 'images/grilled_salmon.jpg', 2, '2025-01-28 16:20:01'),
+(9, 'Homemade Fries', 'Fresh and crispy fries', 4.00, 'images/homemade_fries.jpg', 5, '2025-01-28 16:20:01'),
+(10, 'Pepper Sauce', 'Creamy pepper sauce', 2.50, 'images/pepper_sauce.jpg', 6, '2025-01-28 16:20:01');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `plats_ingredients`
+-- Table structure for `dishes_ingredients`
 --
 
-CREATE TABLE `plats_ingredients` (
+CREATE TABLE `dishes_ingredients` (
   `id` int NOT NULL,
-  `id_plat` int NOT NULL,
-  `id_ingredient` int NOT NULL
+  `dish_id` int NOT NULL,
+  `ingredient_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Déchargement des données de la table `plats_ingredients`
+-- Dumping data for table `dishes_ingredients`
 --
 
-INSERT INTO `plats_ingredients` (`id`, `id_plat`, `id_ingredient`) VALUES
+INSERT INTO `dishes_ingredients` (`id`, `dish_id`, `ingredient_id`) VALUES
 (12, 1, 2),
 (13, 1, 3),
 (14, 1, 8),
@@ -145,107 +145,103 @@ INSERT INTO `plats_ingredients` (`id`, `id_plat`, `id_ingredient`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateurs`
+-- Table structure for `users`
 --
 
-CREATE TABLE `utilisateurs` (
+CREATE TABLE `users` (
   `id` int NOT NULL,
-  `nom` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `mot_de_passe` varchar(255) NOT NULL,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP
+  `password` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `categories`
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `ingredients`
+-- Indexes for table `ingredients`
 --
 ALTER TABLE `ingredients`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `plats`
+-- Indexes for table `dishes`
 --
-ALTER TABLE `plats`
+ALTER TABLE `dishes`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_categorie` (`id_categorie`);
+  ADD KEY `category_id` (`category_id`);
 
 --
--- Index pour la table `plats_ingredients`
+-- Indexes for table `dishes_ingredients`
 --
-ALTER TABLE `plats_ingredients`
+ALTER TABLE `dishes_ingredients`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_plat` (`id_plat`),
-  ADD KEY `id_ingredient` (`id_ingredient`);
+  ADD KEY `dish_id` (`dish_id`),
+  ADD KEY `ingredient_id` (`ingredient_id`);
 
 --
--- Index pour la table `utilisateurs`
+-- Indexes for table `users`
 --
-ALTER TABLE `utilisateurs`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `categories`
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT pour la table `ingredients`
+-- AUTO_INCREMENT for table `ingredients`
 --
 ALTER TABLE `ingredients`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT pour la table `plats`
+-- AUTO_INCREMENT for table `dishes`
 --
-ALTER TABLE `plats`
+ALTER TABLE `dishes`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT pour la table `plats_ingredients`
+-- AUTO_INCREMENT for table `dishes_ingredients`
 --
-ALTER TABLE `plats_ingredients`
+ALTER TABLE `dishes_ingredients`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT pour la table `utilisateurs`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `utilisateurs`
+ALTER TABLE `users`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `plats`
+-- Constraints for table `dishes`
 --
-ALTER TABLE `plats`
-  ADD CONSTRAINT `plats_ibfk_1` FOREIGN KEY (`id_categorie`) REFERENCES `categories` (`id`);
+ALTER TABLE `dishes`
+  ADD CONSTRAINT `dishes_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
 
 --
--- Contraintes pour la table `plats_ingredients`
+-- Constraints for table `dishes_ingredients`
 --
-ALTER TABLE `plats_ingredients`
-  ADD CONSTRAINT `plats_ingredients_ibfk_1` FOREIGN KEY (`id_plat`) REFERENCES `plats` (`id`),
-  ADD CONSTRAINT `plats_ingredients_ibfk_2` FOREIGN KEY (`id_ingredient`) REFERENCES `ingredients` (`id`);
+ALTER TABLE `dishes_ingredients`
+  ADD CONSTRAINT `dishes_ingredients_ibfk_1` FOREIGN KEY (`dish_id`) REFERENCES `dishes` (`id`),
+  ADD CONSTRAINT `dishes_ingredients_ibfk_2` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredients` (`id`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
