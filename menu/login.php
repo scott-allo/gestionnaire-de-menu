@@ -1,122 +1,117 @@
-
 <?php
- //Page de connexion pour les restaurateurs
-session_start();
-include 'includes/db.php';
+$host = "localhost";
+$db = "gestionnaire-de-menu";
+$user = "root"; 
+$password = ""; 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+if(isset($_POST['login'])) {
+    try {
+        // Vérifier si les champs sont remplis
+        if(empty($_POST['email']) || empty($_POST['password'])){
+            header("Location: connection.html?error=Tous les champs sont obligatoires !");
+            exit();
+        }
 
-    // Vérification des informations de connexion
+        // Connexion à la base de données
+        $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // Vérifier si l'email existe dans la base de données
+        $query = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+        $query->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
+        $query->execute();
+        
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+        
+        if($user && password_verify($_POST['password'], $user['password'])) {
+            // Mot de passe correct, redirection vers la page de gestion
+            header("Location: gestion.php?success=Connexion réussie !");
+            exit();
+        } else {
+            // L'email ou le mot de passe est incorrect
+            header("Location: connection.html?error=Email ou mot de passe incorrect !");
+            exit();
+        }
+    } catch (PDOException $e) {
+        header("Location: connection.html?error=Erreur de base de données: " . urlencode($e->getMessage()));
+        exit();
+    }
 }
-
 ?>
 
-
 <!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contactez Matcha Tea</title>
-    <link rel="stylesheet" href="../styles/style.css" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #101720;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: rgb(240, 181, 221);
+        }
+        p {
+            margin-top: 15px;
+        }
+        a {
+            color: #101720;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
 
-  </head>
+    <div class="container">
+        <h2>Bienvenue sur Art'doise</h2>
+        <h3>Connexion</h3>
 
-  <body>
-  <section class="fond">
-  <header class="navbar">
-    <section class="logo">
-      <a href="../index.html" class="lienpourindex">
-      <img
-        src="../assets/logos/Matcha Tea-Logo Officiel - Quad color.png"
-        alt="Logo Matcha Tea"
-        class="logo"
-      />
-      </a>
-    </section>
-  </header>
+        <?php
+        if(isset($_GET['error'])) {
+            echo '<p style="color: red;">' . htmlspecialchars($_GET['error']) . '</p>';
+        }
+        ?>
 
-   <nav class="sidebar">
-        <ul>
-          <li>
-            <a href="./vente.html" class="liensidebar"
-              >Vente</a
-            >
-          </li>
-          <li>
-            <a href="./histoire.html" class="liensidebar"
-              >Histoire</a
-            >
-          </li>
-          <li>
-            <a href="./apropos.html" class="liensidebar"
-              >À propos</a
-            >
-          </li>
-          <li>
-            <a href="./contact.html" class="liensidebar"
-              >Contact</a
-            >
-          </li>
-        </ul>
-      </nav>
-<main>
-<form method="post" action="">
-    Nom d'utilisateur: <input type="text" name="username">
-    Mot de passe: <input type="password" name="password">
-    <button type="submit">Connexion</button>
-</form>
-
-  <section class="conteneur-contact">
-    <div class="illustration">
-      <img src="../assets/logos/Matcha Tea-Logo Officiel - Quad color.png" alt="Illustration de contact">
+        <form action="" method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Mot de passe" required>
+            <button type="submit" name="login">Se connecter</button>
+            <p>Mot de passe oublié? <a href="connexion.php">Cliquez-ici</a></p>
+        </form>
     </div>
-  
-    <div class="formulaire">
-      <h3>Inscrivez-vous</h3>
-      <form action="#" method="post" class="contact-form">
-       
-        <div class="groupe-champ">
-          <label for="nom">Prénom</label>
-          <input type="text" id="prenom" name="prenom" required placeholder="Prénom" />
-        </div>
-    
-        <div class="groupe-champ">
-          <label for="prenom">Nom</label>
-          <input type="text" id="nom" name="nom" required placeholder="Nom" />
-        </div>
 
-        <div class="groupe-champ">
-          <label for="prenom">Téléphone</label>
-          <input type="tel" id="telephone" name="telephone" required placeholder="Téléphone" />
-        </div>
-    
-        <div class="groupe-champ">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required placeholder="Email" />
-        </div>
-        <div class="groupe-champ">
-          <label for="email">Mot de passe</label>
-          <input type="password" id="motdepasse" name="motdepasse" required placeholder="Mot de passe" />
-        </div>
-    
-    
-        
-    
-        <div class="actions-formulaire">
-          <button type="submit">S'inscrire</button>
-        </div>
-      </form>
-    </div>
-  </section>
-</main>
-
-    <footer>
-      <p class="copyright">Matchala Inc. 2025 - tous droits réservés</p>
-    </footer>
-    </section>
-  </body>
+</body>
 </html>
-
