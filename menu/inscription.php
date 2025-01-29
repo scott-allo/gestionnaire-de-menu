@@ -13,37 +13,37 @@ $password = "";
 
 if(isset($_POST['submit'])){
     try {
-        // Check if fields are filled
+        // Vérifier si les champs sont remplis
         if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password'])){
-            header("Location: signup.html?error=All fields are required!");
+            header("Location: connection.html?error=Tous les champs sont obligatoires !");
             exit();
         }
 
-        // Connect to the database
+        // Connexion à la base de données
         $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        // Hash the password
+        // Hacher le mot de passe
         $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-        // Prepare SQL query
-        $query = $pdo->prepare("INSERT INTO user (name, email, password) VALUES (:name, :email, :password)");
+        // Préparer et exécuter la requête d'insertion
+        $query = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
         $query->bindValue(':name', $_POST['name'], PDO::PARAM_STR);
         $query->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
         $query->bindValue(':password', $hashedPassword, PDO::PARAM_STR);
         
-        // Execute the query
         $query->execute();
 
-        // Redirect to login page
-        header("Location: ../connexion.php");
+        // Redirection vers la page de connexion après inscription réussie
+        header("Location: connexion.php?success=Inscription réussie !");
         exit();
     } catch (PDOException $e) {
-        header("Location: signup.html?error=Database error: " . urlencode($e->getMessage()));
+        header("Location: connection.php?error=Erreur de base de données: " . urlencode($e->getMessage()));
         exit();
     }
 }
 ?>
+
 
     <style>
         body {
@@ -81,12 +81,25 @@ if(isset($_POST['submit'])){
         button:hover {
             background-color:rgb(240, 181, 221);
         }
+        p {
+    margin-top: 15px;
+}
+
+a {
+    color: #101720;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>Sign Up</h2>
+        <h2>Bienvenue sur Art'doise</h2>
+        <h3>Inscription</h3>
 
         <?php
         if(isset($_GET['error'])) {
@@ -95,12 +108,14 @@ if(isset($_POST['submit'])){
         
         ?>
 
-        <form action="signup.php" method="POST">
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="text" name="email" placeholder="Email" required>
-         <input type="password" name="password" placeholder="Password" required>
-         <button type="submit" name="submit">Sign Up</button>
-        </form>
+<form action="" method="POST">
+    <input type="text" name="name" placeholder="Nom" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Mot de passe" required>
+    <button type="submit" name="submit">S'inscrire</button>
+    <p>Déjà inscrit ? <a href="connexion.php">Se connecter</a></p>
+</form>
+
     </div>
 
 </body>
