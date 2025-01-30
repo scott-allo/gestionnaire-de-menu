@@ -9,10 +9,11 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Connection error: " . $e->getMessage());
+    
 }
 
 // Retrieve all dishes
-$sql = "SELECT p.id, p.name, p.description, p.price, c.name AS category 
+$sql = "SELECT p.id, p.name, p.description, p.price, p.image, c.name AS category
         FROM dishes p 
         JOIN categories c ON p.category_id = c.id";
 $stmt = $pdo->query($sql);
@@ -103,7 +104,7 @@ $dishes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         td.price {
-            white-space: nowrap; /* Empêche le retour à la ligne pour le prix */
+            white-space: nowrap; 
         }
 
         @media (max-width: 768px) {
@@ -184,6 +185,7 @@ $dishes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>Description</th>
                     <th>Prix</th>
                     <th>Catégorie</th>
+                    <th>Image</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -194,6 +196,13 @@ $dishes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td data-label="Description"><?= htmlspecialchars($dish['description']) ?></td>
                         <td data-label="Prix" class="price"><?= htmlspecialchars($dish['price']) ?> €</td>
                         <td data-label="Catégorie"><?= htmlspecialchars($dish['category']) ?></td>
+                        <td data-label="Image">
+                            <?php if (!empty($dish['image'])):?>
+                                <img src="<?= htmlspecialchars($dish['image'])?>" alt="<?= htmlspecialchars($dish['name']) ?>" width="50">
+                            <?php else: ?>
+                                <span>Pas d'image</span>
+                            <?php endif; ?>       
+                        </td>
                         <td data-label="Actions">
                             <a href="edit.php?id=<?= $dish['id'] ?>">Modifier</a>
                             <a href="delete.php?id=<?= $dish['id'] ?>" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer ce plat ?');">Supprimer</a>
@@ -206,3 +215,9 @@ $dishes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </section>
 </body>
 </html>
+
+
+
+
+
+
