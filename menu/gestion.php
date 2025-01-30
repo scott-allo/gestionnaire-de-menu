@@ -235,24 +235,24 @@ $categories = $stmtCategories->fetchAll(PDO::FETCH_ASSOC);
             <a href="#" class="close">&times;</a>
             <h2>Ajouter un nouveau plat</h2>
             <form method="POST" action="add.php">
-                <label>Nom :</label>
-                <input type="text" name="nom" required>
+    <label>Nom :</label>
+    <input type="text" name="nom" required>
 
-                <label>Description :</label>
-                <textarea name="description" required></textarea>
+    <label>Description :</label>
+    <textarea name="description" required></textarea>
 
-                <label>Prix :</label>
-                <input type="number" name="prix" step="0.01" required>
+    <label>Prix :</label>
+    <input type="number" name="prix" step="0.01" required>
 
-                <label>Catégorie :</label>
-                <select name="id_categorie" required>
-                    <?php foreach ($categories as $categorie): ?>
-                        <option value="<?= $categorie['id'] ?>"><?= htmlspecialchars($categorie['name']) ?></option>
-                    <?php endforeach; ?>
-                </select>
+    <label>Catégorie :</label>
+    <select name="id_categorie" required>
+        <?php foreach ($categories as $categorie): ?>
+            <option value="<?= $categorie['id'] ?>"><?= htmlspecialchars($categorie['name']) ?></option>
+        <?php endforeach; ?>
+    </select>
 
-                <button type="submit">Ajouter</button>
-            </form>
+    <button type="submit">Ajouter</button>
+</form>
         </div>
     </div>
 
