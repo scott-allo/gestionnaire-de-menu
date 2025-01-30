@@ -1,62 +1,137 @@
-<?php
-$host = "localhost";
-$db = "gestionnaire-de-menu";
-$user = "root"; // Nom d'utilisateur MySQL
-$password = ""; // Mot de passe MySQL
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
-
-// Récupérer les catégories pour le formulaire
-$sql = "SELECT * FROM categories";
-$stmt = $pdo->query($sql);
-$categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Ajouter un plat
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nom = $_POST['nom'];
-    $description = $_POST['description'];
-    $prix = $_POST['prix'];
-    $id_categorie = $_POST['id_categorie'];
-
-    $sql = "INSERT INTO plats (nom, ingredients, prix, id_categorie) VALUES (:nom, :ingredients, :prix, :id_categorie)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([
-        ':nom' => $nom,
-        ':ingredients' => $ingredients,
-        ':prix' => $prix,
-        ':id_categorie' => $id_categorie
-    ]);
-    header('Location: index.php');
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un plat</title>
+    <style>
+        /* Styles de base */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        
+        a.button {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        a.button:hover {
+            background-color: #218838;
+        }
+
+        /* Modal (caché par défaut) */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Afficher le modal si ":target" est activé */
+        #modal:target {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        /* Bouton de fermeture */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .close:hover {
+            color: red;
+        }
+
+        /* Formulaire */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal button {
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .modal button:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
-    <h1>Ajouter un nouveau plat</h1>
-    <form method="POST">
-        <label>Nom :</label>
-        <input type="text" name="nom" required><br>
-        <label>Description :</label>
-        <textarea name="description" required></textarea><br>
-        <label>Prix :</label>
-        <input type="number" name="prix" step="0.01" required><br>
-        <label>Catégorie :</label>
-        <select name="id_categorie" required>
-            <?php foreach ($categories as $categorie): ?>
-                <option value="<?= $categorie['id'] ?>"><?= htmlspecialchars($categorie['nom']) ?></option>
-            <?php endforeach; ?>
-        </select><br>
-        <button type="submit">Ajouter</button>
-    </form>
+
+    <!-- Bouton pour ouvrir le modal -->
+    <a href="#modal" class="button">Ajouter un plat</a>
+
+    <!-- Modal (s'ouvre avec #modal) -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <a href="#" class="close">&times;</a> <!-- Ferme le modal -->
+            <h2>Ajouter un nouveau plat</h2>
+            <form method="POST">
+                <label>Nom :</label>
+                <input type="text" name="nom" required>
+
+                <label>Description :</label>
+                <textarea name="description" required></textarea>
+
+                <label>Prix :</label>
+                <input type="number" name="prix" step="0.01" required>
+
+                <label>Catégorie :</label>
+                <select name="id_categorie" required>
+                    <?php foreach ($categories as $categorie): ?>
+                        <option value="<?= $categorie['id'] ?>"><?= htmlspecialchars($categorie['nom']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+
+                <button type="submit">Ajouter</button>
+            </form>
+        </div>
+    </div>
+
 </body>
 </html>

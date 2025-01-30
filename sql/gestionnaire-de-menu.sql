@@ -37,13 +37,12 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`) VALUES
-(1, 'Appetizer'),
-(2, 'Main Course'),
+(1, 'Entrée'),
+(2, 'Plat principal'),
 (3, 'Dessert'),
-(4, 'Drinks'),
-(5, 'Side Dishes'),
+(4, 'Boissons'),
+(5, 'Accompagnements'),
 (6, 'Sauces');
-
 -- --------------------------------------------------------
 
 --
@@ -60,26 +59,26 @@ CREATE TABLE `ingredients` (
 --
 
 INSERT INTO `ingredients` (`id`, `name`) VALUES
-(1, 'Tomato'),
+(1, 'Tomate'),
 (2, 'Mozzarella'),
-(3, 'Chicken'),
-(4, 'Beef'),
-(5, 'Salmon'),
-(6, 'Fresh Cream'),
+(3, 'Poulet'),
+(4, 'Boeuf'),
+(5, 'Saumon'),
+(6, 'Crème fraîche'),
 (7, 'Parmesan'),
-(8, 'Lettuce'),
-(9, 'Bread'),
-(10, 'Mushrooms'),
-(11, 'Onions'),
-(12, 'Pasta'),
-(13, 'Rice'),
-(14, 'Basil'),
-(15, 'Tuna'),
-(16, 'Strawberries'),
-(17, 'Chocolate'),
-(18, 'Sugar'),
-(19, 'Lemon'),
-(20, 'Mint');
+(8, 'Laitue'),
+(9, 'Pain'),
+(10, 'Champignons'),
+(11, 'Oignons'),
+(12, 'Pâtes'),
+(13, 'Riz'),
+(14, 'Basilic'),
+(15, 'Thon'),
+(16, 'Fraises'),
+(17, 'Chocolat'),
+(18, 'Sucre'),
+(19, 'Citron'),
+(20, 'Menthe');
 
 -- --------------------------------------------------------
 
@@ -100,19 +99,17 @@ CREATE TABLE `dishes` (
 --
 -- Dumping data for table `dishes`
 --
-
 INSERT INTO `dishes` (`id`, `name`, `description`, `price`, `image`, `category_id`, `created_at`) VALUES
-(1, 'Caesar Salad', 'Salad made of lettuce, chicken, croutons, and parmesan', 12.50, 'images/caesar_salad.jpg', 1, '2025-01-28 16:20:01'),
-(2, 'Margherita Pizza', 'Pizza with tomato sauce, mozzarella, and basil', 9.90, 'images/margherita_pizza.jpg', 2, '2025-01-28 16:20:01'),
-(3, 'Classic Burger', 'Burger with steak, cheese, tomato, and lettuce', 14.00, 'images/classic_burger.jpg', 2, '2025-01-28 16:20:01'),
-(4, 'Lasagna Bolognese', 'Layered pasta with meat, tomato sauce, and cheese', 13.50, 'images/lasagna.jpg', 2, '2025-01-28 16:20:01'),
-(5, 'Vegetable Soup', 'Hot soup made with fresh vegetables', 8.00, 'images/vegetable_soup.jpg', 1, '2025-01-28 16:20:01'),
-(6, 'Tiramisu', 'Italian dessert made with mascarpone and coffee', 6.00, 'images/tiramisu.jpg', 3, '2025-01-28 16:20:01'),
-(7, 'Chocolate Mousse', 'Light and chocolatey dessert', 5.50, 'images/chocolate_mousse.jpg', 3, '2025-01-28 16:20:01'),
-(8, 'Grilled Salmon Fillet', 'Grilled salmon fillet with seasonal vegetables', 18.00, 'images/grilled_salmon.jpg', 2, '2025-01-28 16:20:01'),
-(9, 'Homemade Fries', 'Fresh and crispy fries', 4.00, 'images/homemade_fries.jpg', 5, '2025-01-28 16:20:01'),
-(10, 'Pepper Sauce', 'Creamy pepper sauce', 2.50, 'images/pepper_sauce.jpg', 6, '2025-01-28 16:20:01');
-
+(1, 'Salade César', 'Salade composée de laitue, poulet, croûtons et parmesan', 12.50, 'images/caesar_salad.jpg', 1, '2025-01-28 16:20:01'),
+(2, 'Pizza Margherita', 'Pizza avec sauce tomate, mozzarella et basilic', 9.90, 'images/margherita_pizza.jpg', 2, '2025-01-28 16:20:01'),
+(3, 'Burger Classique', 'Burger avec steak, fromage, tomate et laitue', 14.00, 'images/classic_burger.jpg', 2, '2025-01-28 16:20:01'),
+(4, 'Lasagne Bolognaise', 'Pâtes en couches avec viande, sauce tomate et fromage', 13.50, 'images/lasagna.jpg', 2, '2025-01-28 16:20:01'),
+(5, 'Soupe de légumes', 'Soupe chaude faite avec des légumes frais', 8.00, 'images/vegetable_soup.jpg', 1, '2025-01-28 16:20:01'),
+(6, 'Tiramisu', 'Dessert italien à base de mascarpone et café', 6.00, 'images/tiramisu.jpg', 3, '2025-01-28 16:20:01'),
+(7, 'Mousse au chocolat', 'Dessert léger et chocolaté', 5.50, 'images/chocolate_mousse.jpg', 3, '2025-01-28 16:20:01'),
+(8, 'Filet de saumon grillé', 'Filet de saumon grillé avec des légumes de saison', 18.00, 'images/grilled_salmon.jpg', 2, '2025-01-28 16:20:01'),
+(9, 'Frites maison', 'Frites fraîches et croquantes', 4.00, 'images/homemade_fries.jpg', 5, '2025-01-28 16:20:01'),
+(10, 'Sauce au poivre', 'Sauce crémeuse au poivre', 2.50, 'images/pepper_sauce.jpg', 6, '2025-01-28 16:20:01');
 -- --------------------------------------------------------
 
 --

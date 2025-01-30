@@ -13,20 +13,20 @@ $password = "";
 
 if(isset($_POST['submit'])){
     try {
-        // Vérifier si les champs sont remplis
+       
         if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password'])){
-            header("Location: connection.html?error=Tous les champs sont obligatoires !");
+            header("Location: login.html?error=Tous les champs sont obligatoires !");
             exit();
         }
 
-        // Connexion à la base de données
+    
         $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        // Hacher le mot de passe
+       
         $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-        // Préparer et exécuter la requête d'insertion
+      
         $query = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
         $query->bindValue(':name', $_POST['name'], PDO::PARAM_STR);
         $query->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
@@ -34,11 +34,11 @@ if(isset($_POST['submit'])){
         
         $query->execute();
 
-        // Redirection vers la page de connexion après inscription réussie
-        header("Location: connexion.php?success=Inscription réussie !");
+      
+        header("Location: login.php?success=Inscription réussie !");
         exit();
     } catch (PDOException $e) {
-        header("Location: connection.php?error=Erreur de base de données: " . urlencode($e->getMessage()));
+        header("Location: login.php?error=Erreur de base de données: " . urlencode($e->getMessage()));
         exit();
     }
 }
@@ -113,7 +113,7 @@ a:hover {
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Mot de passe" required>
     <button type="submit" name="submit">S'inscrire</button>
-    <p>Déjà inscrit ? <a href="connexion.php">Se connecter</a></p>
+    <p>Déjà inscrit ? <a href="login.php">Se connecter</a></p>
 </form>
 
     </div>
