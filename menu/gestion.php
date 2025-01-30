@@ -5,16 +5,16 @@ $user = "root"; // MySQL username
 $password = ""; // MySQL password
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $password);
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, 'root');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Connection error: " . $e->getMessage());
 }
 
 // Retrieve all dishes
-$sql = "SELECT p.id, p.nom, p.description, p.prix, c.nom AS categorie 
-        FROM plats p 
-        JOIN categories c ON p.id_categorie = c.id";
+$sql = "SELECT p.id, p.name, p.description, p.price, c.name AS category 
+        FROM dishes p 
+        JOIN categories c ON p.category_id = c.id";
 $stmt = $pdo->query($sql);
 $plats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -26,7 +26,7 @@ $plats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <h1>Dish List</h1>
-    <a href="ajouter.php">Ajouter un nouveau plat</a>
+    <a href="add.php">Ajouter un nouveau plat</a>
     <table border="1">
         <thead>
             <tr>
