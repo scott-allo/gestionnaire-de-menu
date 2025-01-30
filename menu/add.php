@@ -20,18 +20,18 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nom = $_POST['nom'];
     $description = $_POST['description'];
-    $prix = $_POST['prix'];
-    $id_categorie = $_POST['id_categorie'];
+    $prix = $_POST['price'];
+    $id_categorie = $_POST['id_category'];
 
-    $sql = "INSERT INTO plats (nom, ingredients, prix, id_categorie) VALUES (:nom, :ingredients, :prix, :id_categorie)";
+    $sql = "INSERT INTO dishes (name, ingredients, prix, id_category) VALUES (:name, :ingredients, :price, :id_category)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
-        ':nom' => $nom,
+        ':name' => $nom,
         ':ingredients' => $ingredients,
-        ':prix' => $prix,
+        ':price' => $prix,
         ':id_categorie' => $id_categorie
     ]);
-    header('Location: index.php');
+    header('Location: login.php');
     exit;
 }
 ?>
