@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    
-    <?php
+<?php
 $host = "localhost";
 $db = "gestionnaire-de-menu";
 $user = "root"; 
 $password = ""; 
 
-if(isset($_POST['submit'])){
+if(isset($_POST['login'])) {
     try {
         // Vérifier si les champs sont remplis
-        if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password'])){
+        if(empty($_POST['email']) || empty($_POST['password'])){
             header("Location: connection.html?error=Tous les champs sont obligatoires !");
             exit();
         }
@@ -23,28 +16,35 @@ if(isset($_POST['submit'])){
         $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        // Hacher le mot de passe
-        $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
-        // Préparer et exécuter la requête d'insertion
-        $query = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
-        $query->bindValue(':name', $_POST['name'], PDO::PARAM_STR);
+        // Vérifier si l'email existe dans la base de données
+        $query = $pdo->prepare("SELECT * FROM users WHERE email = :email");
         $query->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
-        $query->bindValue(':password', $hashedPassword, PDO::PARAM_STR);
-        
         $query->execute();
-
-        // Redirection vers la page de connexion après inscription réussie
-        header("Location: connexion.php?success=Inscription réussie !");
-        exit();
+        
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+        
+        if($user && password_verify($_POST['password'], $user['password'])) {
+            // Mot de passe correct, redirection vers la page de gestion
+            header("Location: gestion.php?success=Connexion réussie !");
+            exit();
+        } else {
+            // L'email ou le mot de passe est incorrect
+            header("Location: connection.html?error=Email ou mot de passe incorrect !");
+            exit();
+        }
     } catch (PDOException $e) {
-        header("Location: connection.php?error=Erreur de base de données: " . urlencode($e->getMessage()));
+        header("Location: connection.html?error=Erreur de base de données: " . urlencode($e->getMessage()));
         exit();
     }
 }
 ?>
 
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -79,46 +79,39 @@ if(isset($_POST['submit'])){
             width: 100%;
         }
         button:hover {
-            background-color:rgb(240, 181, 221);
+            background-color: rgb(240, 181, 221);
         }
         p {
-    margin-top: 15px;
-}
-
-a {
-    color: #101720;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
+            margin-top: 15px;
+        }
+        a {
+            color: #101720;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
         <h2>Bienvenue sur Art'doise</h2>
-        <h3>Inscription</h3>
+        <h3>Connexion</h3>
 
         <?php
         if(isset($_GET['error'])) {
             echo '<p style="color: red;">' . htmlspecialchars($_GET['error']) . '</p>';
         }
-        
         ?>
 
-<form action="" method="POST">
-    <input type="text" name="name" placeholder="Nom" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Mot de passe" required>
-    <button type="submit" name="submit">S'inscrire</button>
-    <p>Déjà inscrit ? <a href="connexion.php">Se connecter</a></p>
-</form>
-
+        <form action="" method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Mot de passe" required>
+            <button type="submit" name="login">Se connecter</button>
+            <p>Mot de passe oublié? <a href="connexion.php">Cliquez-ici</a></p>
+        </form>
     </div>
 
 </body>
 </html>
-</head>
-
