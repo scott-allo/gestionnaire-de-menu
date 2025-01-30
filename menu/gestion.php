@@ -5,7 +5,7 @@ $user = "root"; // MySQL username
 $password = ""; // MySQL password
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, '');
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, 'root');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Connection error: " . $e->getMessage());
@@ -18,13 +18,7 @@ $sql = "SELECT p.id, p.name, p.description, p.price, p.image, c.name AS category
         JOIN categories c ON p.category_id = c.id";
 $stmt = $pdo->query($sql);
 $dishes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Retrieve categories for the modal form
-$sqlCategories = "SELECT * FROM categories";
-$stmtCategories = $pdo->query($sqlCategories);
-$categories = $stmtCategories->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -32,11 +26,16 @@ $categories = $stmtCategories->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des plats</title>
     <style>
-        /* Styles de base */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
         }
 
         .container {
@@ -46,7 +45,7 @@ $categories = $stmtCategories->fetchAll(PDO::FETCH_ASSOC);
             border-radius: 8px;
             width: 80%;
             max-width: 800px;
-            margin: 20px auto;
+            margin: 0 auto;
         }
 
         table {
@@ -76,111 +75,43 @@ $categories = $stmtCategories->fetchAll(PDO::FETCH_ASSOC);
 
         a {
             text-decoration: none;
-            color: white;
+            color: #101720;
             padding: 5px 10px;
             border-radius: 5px;
-            background-color: #101720;
+            background-color: #e1e1e1;
             margin-right: 5px;
             display: inline-block;
         }
 
         a:hover {
-            background-color: #f05bb5;
+            background-color: #101720;
+            color: white;
         }
 
-        /* Bouton d'ajout */
         .add-btn {
-            display: inline-block;
+            display: block;
+            text-align: center;
             background-color: #101720;
             color: white;
             padding: 10px;
             border-radius: 5px;
-            margin-bottom: 20px;
+            width: 200px;
+            margin: 20px auto;
         }
 
         .add-btn:hover {
-            background-color: #f05bb5;
+            background-color: rgb(240, 181, 221);
         }
-
-        /* Modal */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-
-        #modal:target {
-            display: flex;
 
         td.price {
             white-space: nowrap; 
-
         }
 
-        .modal-content {
-            background: white;
-            padding: 20px;
-            width: 400px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        .modal-content h2 {
-            margin-top: 0;
-        }
-
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 20px;
-            text-decoration: none;
-            color: black;
-        }
-
-        .close:hover {
-            color: red;
-        }
-
-        /* Formulaire */
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .modal button {
-            width: 100%;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .modal button:hover {
-            background-color: #218838;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
             .container {
                 width: 95%;
                 padding: 15px;
@@ -188,6 +119,10 @@ $categories = $stmtCategories->fetchAll(PDO::FETCH_ASSOC);
 
             table {
                 font-size: 14px;
+            }
+
+            .add-btn {
+                width: 100%;
             }
 
             th, td {
@@ -199,15 +134,50 @@ $categories = $stmtCategories->fetchAll(PDO::FETCH_ASSOC);
                 font-size: 12px;
             }
         }
+
+        @media (max-width: 480px) {
+    table {
+        display: block;
+    }
+
+    thead {
+        display: none; /* Cache les en-têtes sur mobile */
+    }
+
+    tbody tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 8px;
+        background: #fff;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 10px;
+        color: #333;
+    }
+
+    .price {
+        white-space: nowrap;
+    }
+}
+
+        
     </style>
 </head>
 <body>
-
     <section class="container">
-        <!-- Lien pour ouvrir le modal -->
-        <a href="#modal" class="add-btn">Ajouter un nouveau plat</a>
-
-        <!-- Tableau des plats -->
+        <a href="add.php" class="add-btn">Ajouter un nouveau plat</a>
         <table>
             <thead>
                 <tr>
@@ -234,43 +204,14 @@ $categories = $stmtCategories->fetchAll(PDO::FETCH_ASSOC);
                             <?php endif; ?>       
                         </td>
                         <td data-label="Actions">
-
                             <a href="edit.php?id=<?= $dish['id'] ?>">Modifier</a>
                             <a href="delete.php?id=<?= $dish['id'] ?>" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer ce plat ?');">Supprimer</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
              </tbody>
+
         </table>
     </section>
-
-    <!-- Modal d'ajout -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <a href="#" class="close">&times;</a>
-            <h2>Ajouter un nouveau plat</h2>
-            <form method="POST" action="add.php">
-    <label>Nom :</label>
-    <input type="text" name="nom" required>
-
-    <label>Description :</label>
-    <textarea name="description" required></textarea>
-
-    <label>Prix :</label>
-    <input type="number" name="prix" step="0.01" required>
-
-    <label>Catégorie :</label>
-    <select name="id_categorie" required>
-        <?php foreach ($categories as $categorie): ?>
-            <option value="<?= $categorie['id'] ?>"><?= htmlspecialchars($categorie['name']) ?></option>
-        <?php endforeach; ?>
-    </select>
-
-    <button type="submit">Ajouter</button>
-</form>
-        </div>
-    </div>
-
 </body>
 </html>
-
