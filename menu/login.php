@@ -6,17 +6,16 @@ $password = "";
 
 if(isset($_POST['login'])) {
     try {
-        // Vérifier si les champs sont remplis
+        
         if(empty($_POST['email']) || empty($_POST['password'])){
             header("Location: login.php?error=Tous les champs sont obligatoires !");
             exit();
         }
 
-        // Connexion à la base de données
         $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        // Vérifier si l'email existe dans la base de données
+       
         $query = $pdo->prepare("SELECT * FROM users WHERE email = :email");
         $query->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
         $query->execute();
@@ -24,11 +23,11 @@ if(isset($_POST['login'])) {
         $user = $query->fetch(PDO::FETCH_ASSOC);
         
         if($user && password_verify($_POST['password'], $user['password'])) {
-            // Mot de passe correct, redirection vers la page de gestion
+         
             header("Location: gestion.php?success=Connexion réussie !");
             exit();
         } else {
-            // L'email ou le mot de passe est incorrect
+          
             header("Location: login.php?error=Email ou mot de passe incorrect !");
             exit();
         }
