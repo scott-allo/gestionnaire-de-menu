@@ -9,10 +9,11 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Connection error: " . $e->getMessage());
+    
 }
 
 // Retrieve all dishes
-$sql = "SELECT p.id, p.name, p.description, p.price, c.name AS category 
+$sql = "SELECT p.id, p.name, p.description, p.price, p.image, c.name AS category
         FROM dishes p 
         JOIN categories c ON p.category_id = c.id";
 $stmt = $pdo->query($sql);
@@ -114,8 +115,13 @@ $categories = $stmtCategories->fetchAll(PDO::FETCH_ASSOC);
             align-items: center;
         }
 
+
         #modal:target {
             display: flex;
+
+        td.price {
+            white-space: nowrap; 
+
         }
 
         .modal-content {
@@ -209,17 +215,26 @@ $categories = $stmtCategories->fetchAll(PDO::FETCH_ASSOC);
                     <th>Description</th>
                     <th>Prix</th>
                     <th>Catégorie</th>
+                    <th>Image</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($dishes as $dish): ?>
                     <tr>
-                        <td><?= htmlspecialchars($dish['name']) ?></td>
-                        <td><?= htmlspecialchars($dish['description']) ?></td>
-                        <td><?= htmlspecialchars($dish['price']) ?> €</td>
-                        <td><?= htmlspecialchars($dish['category']) ?></td>
-                        <td>
+                        <td data-label="Nom"><?= htmlspecialchars($dish['name']) ?></td>
+                        <td data-label="Description"><?= htmlspecialchars($dish['description']) ?></td>
+                        <td data-label="Prix" class="price"><?= htmlspecialchars($dish['price']) ?> €</td>
+                        <td data-label="Catégorie"><?= htmlspecialchars($dish['category']) ?></td>
+                        <td data-label="Image">
+                            <?php if (!empty($dish['image'])):?>
+                                <img src="<?= htmlspecialchars($dish['image'])?>" alt="<?= htmlspecialchars($dish['name']) ?>" width="50">
+                            <?php else: ?>
+                                <span>Pas d'image</span>
+                            <?php endif; ?>       
+                        </td>
+                        <td data-label="Actions">
+
                             <a href="edit.php?id=<?= $dish['id'] ?>">Modifier</a>
                             <a href="delete.php?id=<?= $dish['id'] ?>" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer ce plat ?');">Supprimer</a>
                         </td>
@@ -258,3 +273,4 @@ $categories = $stmtCategories->fetchAll(PDO::FETCH_ASSOC);
 
 </body>
 </html>
+
