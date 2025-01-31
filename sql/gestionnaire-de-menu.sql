@@ -100,16 +100,16 @@ CREATE TABLE `dishes` (
 -- Dumping data for table `dishes`
 --
 INSERT INTO `dishes` (`id`, `name`, `description`, `price`, `image`, `category_id`, `created_at`) VALUES
-(1, 'Salade César', 'Salade composée de laitue, poulet, croûtons et parmesan', 12.50, 'images/caesar_salad.jpg', 1, '2025-01-28 16:20:01'),
-(2, 'Pizza Margherita', 'Pizza avec sauce tomate, mozzarella et basilic', 9.90, 'images/margherita_pizza.jpg', 2, '2025-01-28 16:20:01'),
-(3, 'Burger Classique', 'Burger avec steak, fromage, tomate et laitue', 14.00, 'images/classic_burger.jpg', 2, '2025-01-28 16:20:01'),
-(4, 'Lasagne Bolognaise', 'Pâtes en couches avec viande, sauce tomate et fromage', 13.50, 'images/lasagna.jpg', 2, '2025-01-28 16:20:01'),
-(5, 'Soupe de légumes', 'Soupe chaude faite avec des légumes frais', 8.00, 'images/vegetable_soup.jpg', 1, '2025-01-28 16:20:01'),
-(6, 'Tiramisu', 'Dessert italien à base de mascarpone et café', 6.00, 'images/tiramisu.jpg', 3, '2025-01-28 16:20:01'),
-(7, 'Mousse au chocolat', 'Dessert léger et chocolaté', 5.50, 'images/chocolate_mousse.jpg', 3, '2025-01-28 16:20:01'),
-(8, 'Filet de saumon grillé', 'Filet de saumon grillé avec des légumes de saison', 18.00, 'images/grilled_salmon.jpg', 2, '2025-01-28 16:20:01'),
-(9, 'Frites maison', 'Frites fraîches et croquantes', 4.00, 'images/homemade_fries.jpg', 5, '2025-01-28 16:20:01'),
-(10, 'Sauce au poivre', 'Sauce crémeuse au poivre', 2.50, 'images/pepper_sauce.jpg', 6, '2025-01-28 16:20:01');
+(1, 'Salade César', 'Salade composée de laitue, poulet, croûtons et parmesan', 12.50, '../images/caesar_salad.jpg', 1, '2025-01-28 16:20:01'),
+(2, 'Pizza Margherita', 'Pizza avec sauce tomate, mozzarella et basilic', 9.90, '../images/margherita_pizza.jpg', 2, '2025-01-28 16:20:01'),
+(3, 'Burger Classique', 'Burger avec steak, fromage, tomate et laitue', 14.00, '../images/classic_burger.jpg', 2, '2025-01-28 16:20:01'),
+(4, 'Lasagne Bolognaise', 'Pâtes en couches avec viande, sauce tomate et fromage', 13.50, '../images/lasagna.jpg', 2, '2025-01-28 16:20:01'),
+(5, 'Soupe de légumes', 'Soupe chaude faite avec des légumes frais', 8.00, '../images/vegetable_soup.jpg', 1, '2025-01-28 16:20:01'),
+(6, 'Tiramisu', 'Dessert italien à base de mascarpone et café', 6.00, '../images/tiramisu.jpg', 3, '2025-01-28 16:20:01'),
+(7, 'Mousse au chocolat', 'Dessert léger et chocolaté', 5.50, '../images/chocolate_mousse.jpg', 3, '2025-01-28 16:20:01'),
+(8, 'Filet de saumon grillé', 'Filet de saumon grillé avec des légumes de saison', 18.00, '../images/grilled_salmon.jpg', 2, '2025-01-28 16:20:01'),
+(9, 'Frites maison', 'Frites fraîches et croquantes', 4.00, '../images/homemade_fries.jpg', 5, '2025-01-28 16:20:01'),
+(10, 'Sauce au poivre', 'Sauce crémeuse au poivre', 2.50, '../images/pepper_sauce.jpg', 6, '2025-01-28 16:20:01');
 -- --------------------------------------------------------
 
 --
