@@ -14,21 +14,21 @@ try {
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifier que tous les champs sont remplis
-    if (!empty($_POST['nom']) && !empty($_POST['description']) && !empty($_POST['prix']) && !empty($_POST['id_categorie'])) {
+    if (!empty($_POST['nom']) && !empty($_POST['description']) && !empty($_POST['price']) && !empty($_POST['id_categorie'])) {
         // Récupérer les données et les sécuriser
-        $nom = htmlspecialchars($_POST['nom']);
+        $name = htmlspecialchars($_POST['name']);
         $description = htmlspecialchars($_POST['description']);
-        $prix = floatval($_POST['prix']);
-        $id_categorie = intval($_POST['id_categorie']);
+        $price = floatval($_POST['price']);
+        $category_id = intval($_POST['category_id']);
 
         try {
             // Préparer la requête
-            $sql = "INSERT INTO dishes (name, description, price, category_id) VALUES (:nom, :description, :prix, :id_categorie)";
+            $sql = "INSERT INTO dishes (name, description, price, category_id) VALUES (:name, :description, :price, :category_id)";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':nom', $nom);
+            $stmt->bindParam(':name', $name);
             $stmt->bindParam(':description', $description);
-            $stmt->bindParam(':prix', $prix);
-            $stmt->bindParam(':id_categorie', $id_categorie);
+            $stmt->bindParam(':price', $price);
+            $stmt->bindParam(':category_id', $category_id);
 
             // Exécuter la requête
             if ($stmt->execute()) {

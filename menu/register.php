@@ -9,7 +9,7 @@
 $host = "localhost";
 $db = "gestionnaire-de-menu";
 $user = "root"; 
-$password = ""; 
+$password = "root"; 
 
 if(isset($_POST['submit'])){
     try {
@@ -35,10 +35,10 @@ if(isset($_POST['submit'])){
         $query->execute();
 
         // Redirection vers la page de connexion après inscription réussie
-        header("Location: connexion.php?success=Inscription réussie !");
+        header("Location: login.php?success=Inscription réussie !");
         exit();
     } catch (PDOException $e) {
-        header("Location: connection.php?error=Erreur de base de données: " . urlencode($e->getMessage()));
+        header("Location: login.php?error=Erreur de base de données: " . urlencode($e->getMessage()));
         exit();
     }
 }
@@ -135,11 +135,11 @@ a {
 </head>
 <body>
     <div class="header">
-       <img src="/gestionnaire-de-menu/assets/chef.png" alt="logo" class="logo1">
+       <img src="/gestionnaire-de-menu/images/chef.png" alt="logo" class="logo1">
     </div>
     <div class="allcontainer">
        <div class="logo2">
-          <img src="/gestionnaire-de-menu/assets/chef.png" alt="logo" class="logo2">
+          <img src="/gestionnaire-de-menu/images/chef.png" alt="logo" class="logo2">
        </div>
        <div class="container">
         <h2>Bienvenue sur Art'doise</h2>
@@ -157,7 +157,7 @@ a {
                <input type="email" name="email" placeholder="Email" required>
                <input type="password" name="password" placeholder="Mot de passe" required>
                <button type="submit" name="submit">S'inscrire</button>
-               <p>Déjà inscrit ? <a href="connexion.php">Se connecter</a></p>
+               <p>Déjà inscrit ? <a href="login.php">Se connecter</a></p>
            </form>
 
     </div>
