@@ -1,11 +1,12 @@
+
 <?php
 $host = "localhost";
-$db = "gestionnaire-de-menu";
-$user = "root"; 
-$password = "";
+$db = "olivia-dondas_gestionnaire-de-menu";
+$user = "olivia-dondas"; 
+$password = "kzCFKQbU3N@t9j7"; 
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, '');
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Connexion échouée : " . $e->getMessage());
@@ -126,3 +127,6 @@ $dishes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </section>
 </body>
 </html>
+apps-fileview.texmex_20250123.01_p1
+menu.php
+Affichage de menu.php
