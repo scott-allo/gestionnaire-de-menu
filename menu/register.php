@@ -163,8 +163,8 @@ if (isset($_POST['submit'])) {
 		
 		h2 {
 			font-family: Patriot;
-	
 
+        }
         /* Media Queries */
         @media (max-width: 768px) {
             .allcontainer {
@@ -224,7 +224,7 @@ if (isset($_POST['submit'])) {
         </section>
     </section>
     <footer class="footer">
-        <p>2025 - Bistroteca - Tous droits réservés</p>
+        <p>2025 - Bistroteca by Olivia Dondas & Scott Allo - Tous droits réservés</p>
     </footer>
 </body>
 </html>
