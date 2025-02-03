@@ -1,8 +1,5 @@
 <?php
-$host = "localhost";
-$db = "gestionnaire-de-menu";
-$user = "root"; 
-$password = ""; 
+$config = require('config.php'); 
 
 if(isset($_POST['login'])) {
     try {
@@ -12,7 +9,7 @@ if(isset($_POST['login'])) {
             exit();
         }
 
-        $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, 'root');
+         $pdo = new PDO("mysql:host=" . $config['db_host'] . ";dbname=" . $config['db_name'] . ";charset=utf8mb4", $config['db_user'], $config['db_pass']);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
        
@@ -43,7 +40,8 @@ if(isset($_POST['login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Bistroteca - Connexion</title>
+	<link rel="icon" type="image/png" href="favicon.png">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -95,8 +93,8 @@ if(isset($_POST['login'])) {
 <body>
 
     <div class="container">
-        <h2>Bienvenue sur Art'doise</h2>
-        <h3>Connexion</h3>
+        <h2>Gestionnaire de menu de Bistroteca</h2>
+        <h3>Connectez-vous</h3>
 
         <?php
         if(isset($_GET['error'])) {
@@ -108,9 +106,18 @@ if(isset($_POST['login'])) {
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Mot de passe" required>
             <button type="submit" name="login">Se connecter</button>
-            <p>Mot de passe oublié? <a href="connexion.php">Cliquez-ici</a></p>
+            <p>Mot de passe oublié? <a href="reset_request.php">Cliquez-ici</a></p>
+			<p>Pas encore inscrit ? <a href="register.php">S'inscrire</a></p>
         </form>
     </div>
 
 </body>
 </html>
+
+
+<?php
+// Afficher les erreurs PHP pour le débogage
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
