@@ -127,6 +127,3 @@ $dishes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </section>
 </body>
 </html>
-apps-fileview.texmex_20250123.01_p1
-menu.php
-Affichage de menu.php
