@@ -193,13 +193,14 @@ input[type="checkbox"]:checked + .modal .modal-content {
     padding: 20px;
   }
   .body {
-    padding-top: 20vh;
+    padding-top: 30vh;
   }
 }
 
 @media (max-width: 480px) {
   .body {
-    padding-top: 30vh;
+    padding-top: 50vh;
+    width: 100%;
   }
 
   .modal-content {
@@ -222,7 +223,6 @@ input[type="checkbox"]:checked + .modal .modal-content {
 
     table {
       display: block;
-      width: 100%;
       overflow-x: auto;
     }
     thead {
