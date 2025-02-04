@@ -277,6 +277,60 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 width: 100%;
                 padding: 15px;
             }
+                /* Adaptation responsive */
+      @media (max-width: 768px) {
+            .modal-content {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+
+      @media (max-width: 480px) {
+			  
+	.modal-content {
+             width: 100%;
+             padding: 15px;
+            }
+		  
+			  
+    table {
+        display: block;
+		width: 100%;
+		overflow-x: auto;
+    }
+    thead {
+        display: none; /* Cache les en-têtes sur mobile */
+    }
+    tbody tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 10px;
+        background: #fff;
+    }
+    td {
+        display: flex;
+		align-items: center;
+        justify-content: space-between;
+        padding: 12px 8px;
+		font-size: 14px;
+    }
+    td::before {
+        content: attr(data-label);
+		flex:1;
+        font-weight: bold;
+        margin-right: 10px;
+        color: #555;
+    }
+    .price {
+		font-size: 16px;
+		font-weight: bold;
+        white-space: nowrap;
+		
+    }	
+}
         }
     </style>
 </head>

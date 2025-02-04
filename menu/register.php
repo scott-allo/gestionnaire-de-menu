@@ -48,6 +48,8 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bistroteca - Inscription</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="https://use.typekit.net/nxs1cpg.css">
+    <link rel="stylesheet" href="https://use.typekit.net/nxs1cpg.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -132,7 +134,17 @@ if (isset($_POST['submit'])) {
             margin-left: 40px;
         }
 
+        .h2 {
+
+            font-family: "patriot", sans-serif;
+            font-weight: 400;
+            font-style: normal;            
+        }
+
         .header, .footer {
+            font-family: "patriot", sans-serif;
+            font-weight: 200;
+            font-style: normal;
             width: 100%;
             background-color: #E59710;
             color: white;
