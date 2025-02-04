@@ -194,13 +194,6 @@ input[type="checkbox"]:checked + .modal .modal-content {
     padding: 20px;
   }
 
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    height: 60px;
-  }
-
   .footer {
     position: sticky;
     bottom: 0;
@@ -214,7 +207,7 @@ input[type="checkbox"]:checked + .modal .modal-content {
   }
 
   body {
-    padding-top: 70px; /* Toujours légèrement plus que la hauteur du header */
+    padding-top: 150px; /* Toujours légèrement plus que la hauteur du header */
   }
 
   .modal-content {
