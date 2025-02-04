@@ -5,8 +5,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 10vh; /* Évite le chevauchement avec le header */
-  padding-bottom: 60px;
+  padding-top: 30vh; /* Évite le chevauchement avec le header */
+  padding-bottom: 80px;
   min-height: 100vh;
   margin: 0;
   flex-direction: column;
