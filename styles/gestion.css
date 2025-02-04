@@ -192,9 +192,16 @@ input[type="checkbox"]:checked + .modal .modal-content {
     width: 90%;
     padding: 20px;
   }
+  .header {
+    padding-top: 20vh;
+  }
 }
 
 @media (max-width: 480px) {
+  .header {
+    padding-top: 20vh;
+  }
+
   .modal-content {
     width: 100%;
     padding: 15px;
