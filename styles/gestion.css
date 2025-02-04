@@ -5,7 +5,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 20vh; /* Évite le chevauchement avec le header */
+  padding-top: 20vh;
   padding-bottom: 80px;
   min-height: 100vh;
   margin: 0;
@@ -80,6 +80,7 @@ a:hover {
   border-radius: 5px;
   width: 200px;
   margin: 20px auto;
+  cursor: pointer;
 }
 
 .add-btn:hover {
@@ -213,9 +214,15 @@ input[type="checkbox"]:checked + .modal .modal-content {
       width: 90%;
       padding: 20px;
     }
+    body {
+      padding-top: 10vh;
+    }
   }
 
   @media (max-width: 480px) {
+    body {
+      padding-top: 5vh;
+    }
     .modal-content {
       width: 100%;
       padding: 15px;
