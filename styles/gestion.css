@@ -204,6 +204,7 @@ input[type="checkbox"]:checked + .modal .modal-content {
 @media (max-width: 480px) {
   .container {
     margin-top: 80px; /* Ajuste selon la hauteur du header */
+    width: 100%;
   }
 
   body {
