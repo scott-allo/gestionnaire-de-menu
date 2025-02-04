@@ -1,0 +1,66 @@
+@import url("https://use.typekit.net/nxs1cpg.css");
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.logo1 {
+  text-align: center;
+  height: auto;
+  max-width: 120px;
+  margin-top: 0px;
+}
+
+.logo2 {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin-left: 40px;
+}
+
+.h2 {
+  font-family: "patriot", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.header,
+.footer {
+  font-weight: 200;
+  font-style: normal;
+  width: 100%;
+  background-color: #e59710;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  box-sizing: border-box;
+  min-height: 60px;
+}
+
+.header {
+  top: 0;
+  height: 10vh;
+}
+
+.footer {
+  bottom: 0;
+  margin-top: 20px;
+  height: 25px;
+}
+
+h2 {
+  font-family: Patriot;
+}
