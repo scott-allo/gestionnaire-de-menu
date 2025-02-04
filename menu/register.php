@@ -49,7 +49,6 @@ if (isset($_POST['submit'])) {
     <title>Bistroteca - Inscription</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="https://use.typekit.net/nxs1cpg.css">
-    <link rel="stylesheet" href="https://use.typekit.net/nxs1cpg.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -142,7 +141,6 @@ if (isset($_POST['submit'])) {
         }
 
         .header, .footer {
-            font-family: "patriot", sans-serif;
             font-weight: 200;
             font-style: normal;
             width: 100%;
