@@ -5,13 +5,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 150px; /* Évite le chevauchement avec le header */
-  padding-bottom: 80px;
+  padding-top: 10vh; /* Évite le chevauchement avec le header */
+  padding-bottom: 60px;
   min-height: 100vh;
   margin: 0;
   flex-direction: column;
-  width: 100%;
-  box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
 }
 
 /* Conteneur central pour les éléments */
@@ -23,29 +21,6 @@ body {
   width: 80%;
   max-width: 800px;
   margin: 0 auto;
-}
-
-/* Header et Footer */
-.header,
-.footer {
-  width: 100%;
-  background-color: #101720;
-  color: white;
-  text-align: center;
-  padding: 15px 0;
-  position: fixed;
-  left: 0;
-  z-index: 999;
-}
-
-.header {
-  top: 0;
-  height: 60px; /* Ajustez la hauteur si nécessaire */
-}
-
-.footer {
-  bottom: 0;
-  height: 25px;
 }
 
 /* Styles de la table des plats */
@@ -217,84 +192,62 @@ input[type="checkbox"]:checked + .modal .modal-content {
     width: 90%;
     padding: 20px;
   }
-
-  .footer {
-    position: sticky;
-    bottom: 0;
-    z-index: 999;
-    width: 100%; /* Assure que le footer couvre toute la largeur */
-  }
 }
 
 @media (max-width: 480px) {
-  .container {
-    margin-top: 80px; /* Ajuste selon la hauteur du header */
-    width: 100%;
-  }
-
-  body {
-    padding-top: 150px; /* Toujours légèrement plus que la hauteur du header */
-  }
-
   .modal-content {
     width: 100%;
     padding: 15px;
   }
-
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    width: 100%; /* Assure que le header couvre toute la largeur */
-    height: 60px; /* Ajustez la hauteur si nécessaire */
+  /* Adaptation responsive */
+  @media (max-width: 768px) {
+    .modal-content {
+      width: 90%;
+      padding: 20px;
+    }
   }
 
-  .footer {
-    position: sticky;
-    bottom: 0;
-    z-index: 999;
-    width: 100%; /* Assure que le footer couvre toute la largeur */
-  }
+  @media (max-width: 480px) {
+    .modal-content {
+      width: 100%;
+      padding: 15px;
+    }
 
-  table {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-  }
-
-  thead {
-    display: none; /* Cache les en-têtes sur mobile */
-  }
-
-  tbody tr {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 10px;
-    background: #fff;
-  }
-
-  td {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 8px;
-    font-size: 14px;
-  }
-
-  td::before {
-    content: attr(data-label);
-    flex: 1;
-    font-weight: bold;
-    margin-right: 10px;
-    color: #555;
-  }
-
-  .price {
-    font-size: 16px;
-    font-weight: bold;
-    white-space: nowrap;
+    table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+    }
+    thead {
+      display: none; /* Cache les en-têtes sur mobile */
+    }
+    tbody tr {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 10px;
+      background: #fff;
+    }
+    td {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 8px;
+      font-size: 14px;
+    }
+    td::before {
+      content: attr(data-label);
+      flex: 1;
+      font-weight: bold;
+      margin-right: 10px;
+      color: #555;
+    }
+    .price {
+      font-size: 16px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
   }
 }
