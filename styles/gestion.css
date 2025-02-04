@@ -210,18 +210,58 @@ input[type="checkbox"]:checked + .modal .modal-content {
   }
   /* Adaptation responsive */
   @media (max-width: 768px) {
+    table {
+      display: block;
+      overflow-x: auto;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    th,
+    td {
+      padding: 10px 5px; /* Réduction des espaces */
+      font-size: 14px; /* Police plus petite pour l'adaptation */
+      word-break: break-word; /* Casse automatique des mots longs */
+    }
+
+    th {
+      white-space: nowrap; /* Évite les sauts de lignes dans les titres */
+    }
+
+    td img {
+      max-width: 80px; /* Limitation de la taille des images */
+      height: auto;
+      border-radius: 4px;
+    }
+
+    td.price {
+      text-align: right; /* Alignement des prix à droite */
+    }
+
+    /* Alignement des boutons d'action */
+    td:last-child {
+      display: flex;
+      flex-direction: column;
+      gap: 5px; /* Espacement entre les boutons */
+    }
+
+    a {
+      font-size: 12px; /* Police réduite pour les boutons */
+      padding: 6px 8px; /* Ajustement des paddings */
+    }
+
     .modal-content {
       width: 90%;
       padding: 20px;
     }
     body {
-      padding-top: 10vh;
+      padding-top: 5vh;
     }
   }
 
   @media (max-width: 480px) {
     body {
-      padding-top: 5vh;
+      padding-top: 2vh;
     }
     .modal-content {
       width: 100%;
