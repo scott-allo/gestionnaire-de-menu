@@ -5,11 +5,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 20vh; /* Évite le chevauchement avec le header */
+  padding-top: 150px; /* Évite le chevauchement avec le header */
   padding-bottom: 80px;
   min-height: 100vh;
   margin: 0;
   flex-direction: column;
+  width: 100%;
+  box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
 }
 
 /* Conteneur central pour les éléments */
@@ -197,6 +199,7 @@ input[type="checkbox"]:checked + .modal .modal-content {
     position: sticky;
     bottom: 0;
     z-index: 999;
+    width: 100%; /* Assure que le footer couvre toute la largeur */
   }
 }
 
@@ -219,13 +222,15 @@ input[type="checkbox"]:checked + .modal .modal-content {
     position: sticky;
     top: 0;
     z-index: 999;
-    height: 60px;
+    width: 100%; /* Assure que le header couvre toute la largeur */
+    height: 60px; /* Ajustez la hauteur si nécessaire */
   }
 
   .footer {
     position: sticky;
     bottom: 0;
     z-index: 999;
+    width: 100%; /* Assure que le footer couvre toute la largeur */
   }
 
   table {
@@ -233,9 +238,11 @@ input[type="checkbox"]:checked + .modal .modal-content {
     width: 100%;
     overflow-x: auto;
   }
+
   thead {
     display: none; /* Cache les en-têtes sur mobile */
   }
+
   tbody tr {
     display: flex;
     flex-direction: column;
@@ -245,6 +252,7 @@ input[type="checkbox"]:checked + .modal .modal-content {
     border-radius: 10px;
     background: #fff;
   }
+
   td {
     display: flex;
     align-items: center;
@@ -252,6 +260,7 @@ input[type="checkbox"]:checked + .modal .modal-content {
     padding: 12px 8px;
     font-size: 14px;
   }
+
   td::before {
     content: attr(data-label);
     flex: 1;
@@ -259,6 +268,7 @@ input[type="checkbox"]:checked + .modal .modal-content {
     margin-right: 10px;
     color: #555;
   }
+
   .price {
     font-size: 16px;
     font-weight: bold;
